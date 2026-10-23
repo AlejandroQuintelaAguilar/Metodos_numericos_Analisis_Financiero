@@ -1,0 +1,49 @@
+{
+  "name": "proyecto_1_metodos_numericos",
+  "version": "1.0.0",
+  "description": "Desafío Académico de Métodos Numéricos (UMSA - Informática) - Método de Gradientes Conjugados Precondicionado (GCP) aplicado a Asignación Presupuestaria TI",
+  "main": "dist/core/index.js",
+  "types": "dist/core/index.d.ts",
+  "scripts": {
+    "dev": "vite",
+    "build:ui": "vite build",
+    "preview": "vite preview",
+    "build": "tsc && vite build",
+    "verify": "tsc && node dist/core/verify-scenarios.js",
+    "test:solvers": "tsc && node dist/core/test-solvers.js",
+    "test:qa": "tsc && node dist/qa/run-qa-cli.js",
+    "test": "tsc && node dist/core/verify-scenarios.js && node dist/core/test-solvers.js && node dist/qa/run-qa-cli.js"
+  },
+  "keywords": [
+    "numerical-methods",
+    "preconditioned-conjugate-gradient",
+    "gcp",
+    "cholesky-decomposition",
+    "financial-optimization",
+    "sylvester-criterion",
+    "clean-architecture",
+    "qa-automation",
+    "umsa"
+  ],
+  "author": "Antigravity & UMSA Informática",
+  "license": "MIT",
+  "dependencies": {
+    "katex": "^0.16.22",
+    "lucide-react": "^1.16.0",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.1.13",
+    "@types/katex": "^0.16.7",
+    "@types/node": "^22.13.10",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^4.3.4",
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.3",
+    "tailwindcss": "^4.1.13",
+    "typescript": "^5.8.2",
+    "vite": "^6.2.0"
+  }
+}
