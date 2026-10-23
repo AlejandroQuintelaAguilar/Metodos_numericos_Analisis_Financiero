@@ -10,7 +10,14 @@ import { QAEngine } from '../../qa/engine/qa-engine';
 import { QASummaryReport } from '../../qa/types/qa.types';
 
 export const QAPanel: React.FC = () => {
-  const [report, setReport] = useState<QASummaryReport | null>(null);
+  const [report, setReport] = useState<QASummaryReport | null>(() => {
+    try {
+      const engine = new QAEngine();
+      return engine.runAllTests();
+    } catch {
+      return null;
+    }
+  });
   const [isRunning, setIsRunning] = useState(false);
   const [expandedTestId, setExpandedTestId] = useState<string | null>(null);
 
