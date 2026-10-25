@@ -69,35 +69,41 @@ export const ComparativeTable: React.FC = () => {
               </td>
             </tr>
 
-            {/* Max Error Absoluto */}
+            {/* Error Absoluto Por Variable */}
             <tr className="hover:bg-slate-800/30 transition">
-              <td className="py-3 px-4 font-semibold text-slate-200">
-                Error Absoluto Máximo (E_a)
+              <td className="py-3 px-4 font-semibold text-slate-200 align-top">
+                Error Absoluto por Variable (E_a,i)
               </td>
-              <td className="py-3 px-4 font-mono text-slate-400">
-                7.11 × 10⁻¹⁵ $K
+              <td className="py-3 px-4 font-mono text-slate-400 text-[11px] space-y-0.5">
+                <div>x₁: 0.00 × 10⁰ | x₂: 1.78 × 10⁻¹⁵</div>
+                <div>x₃: 7.11 × 10⁻¹⁵ | x₄: 1.78 × 10⁻¹⁵</div>
               </td>
-              <td className="py-3 px-4 font-mono text-slate-400">
-                7.11 × 10⁻¹⁵ $K
+              <td className="py-3 px-4 font-mono text-slate-400 text-[11px] space-y-0.5">
+                <div>x₁: 7.11 × 10⁻¹⁵ | x₂: 3.55 × 10⁻¹⁵</div>
+                <div>x₃: 0.00 × 10⁰ | x₄: 1.78 × 10⁻¹⁵</div>
               </td>
-              <td className="py-3 px-4 font-mono text-slate-400">
-                2.13 × 10⁻¹⁴ $K
+              <td className="py-3 px-4 font-mono text-slate-400 text-[11px] space-y-0.5">
+                <div>x₁: 3.55 × 10⁻¹⁵ | x₂: 1.78 × 10⁻¹⁵</div>
+                <div>x₃: 7.11 × 10⁻¹⁵ | x₄: 2.13 × 10⁻¹⁴</div>
               </td>
             </tr>
 
-            {/* Error Porcentual */}
+            {/* Error Porcentual Por Variable */}
             <tr className="hover:bg-slate-800/30 transition">
-              <td className="py-3 px-4 font-semibold text-slate-200">
-                Error Porcentual Máximo (E_p)
+              <td className="py-3 px-4 font-semibold text-slate-200 align-top">
+                Error Porcentual por Variable (E_p,i)
               </td>
-              <td className="py-3 px-4 font-mono text-emerald-400 font-semibold">
-                0.000000%
+              <td className="py-3 px-4 font-mono text-emerald-400 font-semibold text-[11px] space-y-0.5">
+                <div>x₁: 0.000000% | x₂: 0.000000%</div>
+                <div>x₃: 0.000000% | x₄: 0.000000%</div>
               </td>
-              <td className="py-3 px-4 font-mono text-emerald-400 font-semibold">
-                0.000000%
+              <td className="py-3 px-4 font-mono text-emerald-400 font-semibold text-[11px] space-y-0.5">
+                <div>x₁: 0.000000% | x₂: 0.000000%</div>
+                <div>x₃: 0.000000% | x₄: 0.000000%</div>
               </td>
-              <td className="py-3 px-4 font-mono text-emerald-400 font-semibold">
-                0.000000%
+              <td className="py-3 px-4 font-mono text-emerald-400 font-semibold text-[11px] space-y-0.5">
+                <div>x₁: 0.000000% | x₂: 0.000000%</div>
+                <div>x₃: 0.000000% | x₄: 0.000000%</div>
               </td>
             </tr>
 

@@ -160,6 +160,41 @@ export const GcpVsGcSection: React.FC<GcpVsGcSectionProps> = ({
         gcpHistory={gcpResult.history}
         tolerance={tolerance}
       />
+
+      {/* Tabla de Trazabilidad Paso a Paso del Algoritmo de Suñagua (2020) */}
+      <div className="mt-6 pt-6 border-t border-slate-800/80">
+        <h4 className="text-xs font-bold text-slate-300 uppercase tracking-wider mb-3">
+          Trazabilidad de Iteraciones del Algoritmo GCP de Suñagua (2020) (Mz_k = r_k, α_k, β_k, x_k)
+        </h4>
+        <div className="overflow-x-auto rounded-xl border border-slate-800">
+          <table className="w-full text-left text-[11px] font-mono">
+            <thead className="bg-slate-950 text-slate-400 uppercase border-b border-slate-800">
+              <tr>
+                <th className="py-2.5 px-3">Paso k</th>
+                <th className="py-2.5 px-3">Tamaño α_k</th>
+                <th className="py-2.5 px-3">Factor β_k</th>
+                <th className="py-2.5 px-3">Norma ||r_k||₂</th>
+                <th className="py-2.5 px-3">||r_k||₂ / ||b||₂</th>
+                <th className="py-2.5 px-3">Aproximación x_k ($K USD)</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-slate-800/60 bg-slate-950/50">
+              {gcpResult.history.map((step) => (
+                <tr key={step.iteration} className="hover:bg-slate-900/60 transition">
+                  <td className="py-2 px-3 font-bold text-emerald-400">k = {step.iteration}</td>
+                  <td className="py-2 px-3 text-slate-300">{step.alpha.toFixed(6)}</td>
+                  <td className="py-2 px-3 text-slate-400">{step.beta.toFixed(6)}</td>
+                  <td className="py-2 px-3 text-slate-300">{step.residualNorm.toExponential(3)}</td>
+                  <td className="py-2 px-3 font-semibold text-blue-300">{step.relativeResidual.toExponential(3)}</td>
+                  <td className="py-2 px-3 text-slate-200">
+                    [{step.x.map(v => v.toFixed(3)).join(', ')}]
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   );
 };

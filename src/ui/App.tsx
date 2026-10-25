@@ -108,33 +108,47 @@ export const App: React.FC = () => {
     );
   }, [matrixA, vectorB, choleskyResult, gcpResult, validation.isValid]);
 
-  // 6. Números de Condición calculados
+  // 6. Números de Condición calculados dinámicamente y protegidos ante matrices inválidas
   const conditionNumbers = useMemo(() => {
-    if (activeScenarioId === 'ideal') {
-      return {
-        condA: SCENARIO_IDEAL.spectral.conditionNumber,
-        condPrec: SCENARIO_IDEAL.preconditioning.preconditionedConditionNumber
-      };
-    } else if (activeScenarioId === 'financial_stress') {
-      return {
-        condA: SCENARIO_FINANCIAL_STRESS.spectral.conditionNumber,
-        condPrec: SCENARIO_FINANCIAL_STRESS.preconditioning.preconditionedConditionNumber
-      };
-    } else if (activeScenarioId === 'ill_conditioned') {
-      return {
-        condA: SCENARIO_ILL_CONDITIONED.spectral.conditionNumber,
-        condPrec: SCENARIO_ILL_CONDITIONED.preconditioning.preconditionedConditionNumber
-      };
-    } else {
-      // Para modo custom, aproximación rápida
-      const prec = PreconditionerFactory.create(preconditionerType);
-      prec.initialize(matrixA);
-      return {
-        condA: prec.getConditionNumber(matrixA),
-        condPrec: prec.getConditionNumber(matrixA)
-      };
+    if (!validation.isValid) {
+      return { condA: NaN, condPrec: NaN };
     }
-  }, [activeScenarioId, matrixA, preconditionerType]);
+    try {
+      // Condición original κ(A)
+      let condA: number;
+      if (activeScenarioId === 'ideal') {
+        condA = SCENARIO_IDEAL.spectral.conditionNumber;
+      } else if (activeScenarioId === 'financial_stress') {
+        condA = SCENARIO_FINANCIAL_STRESS.spectral.conditionNumber;
+      } else if (activeScenarioId === 'ill_conditioned') {
+        condA = SCENARIO_ILL_CONDITIONED.spectral.conditionNumber;
+      } else {
+        const idPrec = PreconditionerFactory.create('identity', matrixA);
+        condA = idPrec.getConditionNumber(matrixA);
+      }
+
+      // Condición precondicionada κ(M⁻¹A) según el precondicionador activo
+      let condPrec: number;
+      if (preconditionerType === 'identity') {
+        condPrec = condA;
+      } else if (preconditionerType === 'jacobi' && activeScenarioId !== 'custom') {
+        if (activeScenarioId === 'ideal') {
+          condPrec = SCENARIO_IDEAL.preconditioning.preconditionedConditionNumber;
+        } else if (activeScenarioId === 'financial_stress') {
+          condPrec = SCENARIO_FINANCIAL_STRESS.preconditioning.preconditionedConditionNumber;
+        } else {
+          condPrec = SCENARIO_ILL_CONDITIONED.preconditioning.preconditionedConditionNumber;
+        }
+      } else {
+        const prec = PreconditionerFactory.create(preconditionerType, matrixA);
+        condPrec = prec.getConditionNumber(matrixA);
+      }
+
+      return { condA, condPrec };
+    } catch {
+      return { condA: NaN, condPrec: NaN };
+    }
+  }, [activeScenarioId, matrixA, preconditionerType, validation.isValid]);
 
   // Manejadores de eventos interactivos
   const handleSelectScenario = (id: ScenarioId) => {
