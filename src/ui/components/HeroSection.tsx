@@ -4,11 +4,29 @@
  * identificación del estudiante y síntesis del problema de optimización presupuestaria TI.
  */
 
-import React from 'react';
-import { Cpu, ArrowDown } from 'lucide-react';
+import React, { useState } from 'react';
+import { Cpu, ArrowDown, UserCheck, Edit3, Check } from 'lucide-react';
 import { MathBlock } from './MathBlock';
 
 export const HeroSection: React.FC = () => {
+  const [isEditingStudent, setIsEditingStudent] = useState(false);
+  const [studentName, setStudentName] = useState(() =>
+    localStorage.getItem('umsa_student_name') || 'Univ. [Ingresa tu Nombre Completo]'
+  );
+  const [studentRU, setStudentRU] = useState(() =>
+    localStorage.getItem('umsa_student_ru') || 'R.U. / C.I.: [Tu Registro]'
+  );
+  const [studentParallel, setStudentParallel] = useState(() =>
+    localStorage.getItem('umsa_student_parallel') || 'Paralelo A · Gestión I/2026'
+  );
+
+  const handleSaveStudent = () => {
+    localStorage.setItem('umsa_student_name', studentName);
+    localStorage.setItem('umsa_student_ru', studentRU);
+    localStorage.setItem('umsa_student_parallel', studentParallel);
+    setIsEditingStudent(false);
+  };
+
   return (
     <section id="inicio" className="relative pt-12 pb-16 overflow-hidden border-b border-slate-800/80 bg-gradient-to-b from-slate-900/60 via-slate-950 to-slate-950">
       {/* Glow decorativo de fondo */}
@@ -16,7 +34,7 @@ export const HeroSection: React.FC = () => {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Encabezado Institucional UMSA */}
-        <div className="flex flex-wrap items-center justify-between gap-4 mb-8 pb-6 border-b border-slate-800/60">
+        <div className="flex flex-wrap items-center justify-between gap-4 mb-6 pb-6 border-b border-slate-800/60">
           <div>
             <span className="text-xs uppercase tracking-wider font-semibold text-blue-400">
               Universidad Mayor de San Andrés · Facultad de Ciencias Puras y Naturales
@@ -33,6 +51,72 @@ export const HeroSection: React.FC = () => {
               Prof. Porfirio Suñagua S. (2020)
             </span>
           </div>
+        </div>
+
+        {/* Tarjeta de Datos del Estudiante (Módulo 1 Obligatorio - Sección 7) */}
+        <div className="max-w-4xl mx-auto mb-8 p-4 rounded-2xl bg-slate-900/90 border border-blue-500/30 shadow-lg flex flex-wrap items-center justify-between gap-4">
+          <div className="flex items-center gap-3.5">
+            <div className="p-2.5 rounded-xl bg-blue-500/15 text-blue-400 border border-blue-500/30">
+              <UserCheck className="w-5 h-5" />
+            </div>
+            {!isEditingStudent ? (
+              <div>
+                <span className="text-[10px] uppercase tracking-wider font-semibold text-blue-400 block">
+                  Módulo 1 · Datos del Estudiante (Modalidad Individual)
+                </span>
+                <div className="flex flex-wrap items-center gap-x-4 gap-y-1 mt-0.5">
+                  <span className="text-sm font-bold text-white">{studentName}</span>
+                  <span className="text-xs font-mono text-emerald-400 bg-emerald-950/60 px-2 py-0.5 rounded border border-emerald-800/50">
+                    {studentRU}
+                  </span>
+                  <span className="text-xs text-slate-400">
+                    Mención: <strong className="text-slate-200">Desarrollo de Sistemas</strong> · {studentParallel}
+                  </span>
+                </div>
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 w-full sm:w-auto">
+                <input
+                  type="text"
+                  value={studentName}
+                  onChange={(e) => setStudentName(e.target.value)}
+                  placeholder="Nombre Completo"
+                  className="px-2.5 py-1.5 text-xs rounded-lg bg-slate-950 border border-slate-700 text-white focus:outline-none focus:ring-1 focus:ring-blue-500"
+                />
+                <input
+                  type="text"
+                  value={studentRU}
+                  onChange={(e) => setStudentRU(e.target.value)}
+                  placeholder="R.U. / C.I."
+                  className="px-2.5 py-1.5 text-xs font-mono rounded-lg bg-slate-950 border border-slate-700 text-emerald-300 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                />
+                <input
+                  type="text"
+                  value={studentParallel}
+                  onChange={(e) => setStudentParallel(e.target.value)}
+                  placeholder="Paralelo / Gestión"
+                  className="px-2.5 py-1.5 text-xs rounded-lg bg-slate-950 border border-slate-700 text-slate-200 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                />
+              </div>
+            )}
+          </div>
+
+          <button
+            onClick={() => (isEditingStudent ? handleSaveStudent() : setIsEditingStudent(true))}
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition"
+          >
+            {isEditingStudent ? (
+              <>
+                <Check className="w-3.5 h-3.5 text-emerald-400" />
+                <span>Guardar Datos</span>
+              </>
+            ) : (
+              <>
+                <Edit3 className="w-3.5 h-3.5 text-blue-400" />
+                <span>Editar Estudiante</span>
+              </>
+            )}
+          </button>
         </div>
 
         {/* Título Principal */}
