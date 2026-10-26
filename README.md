@@ -50,8 +50,8 @@ npm -v
 ### 2. Clonar el repositorio
 Descarga el proyecto desde Git y entra en la carpeta:
 ```bash
-git clone <URL_DEL_REPOSITORIO>
-cd Proyecto_1
+git clone https://github.com/AlejandroQuintelaAguilar/Metodos_numericos_Analisis_Financiero.git
+cd Metodos_numericos_Analisis_Financiero
 ```
 
 ### 3. Instalar las dependencias
