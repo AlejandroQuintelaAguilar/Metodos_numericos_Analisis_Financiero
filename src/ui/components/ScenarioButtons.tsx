@@ -21,14 +21,14 @@ export const ScenarioButtons: React.FC<ScenarioButtonsProps> = ({
   onResetCustom
 }) => {
   return (
-    <div className="p-6 rounded-2xl bg-slate-900/90 border border-slate-800 shadow-xl mb-8">
-      <div className="flex flex-wrap items-center justify-between gap-4 mb-4">
+    <div id="escenarios" className="p-6 rounded-2xl bg-slate-900/90 border border-slate-800 shadow-xl">
+      <div className="flex flex-wrap items-center justify-between gap-4 mb-6 pb-4 border-b border-slate-800">
         <div>
           <span className="text-xs uppercase tracking-wider font-semibold text-blue-400">
-            Módulo 5 · Carga Rápida de Escenarios Oficiales
+            Módulo 5 · Tres Escenarios Obligatorios (Sección 5 y 7.5)
           </span>
-          <h3 className="text-base font-bold text-white tracking-tight mt-0.5">
-            Selecciona un Escenario Numérico Preconfigurado
+          <h3 className="text-xl font-bold text-white tracking-tight mt-0.5">
+            Carga Rápida y Ejecución de Escenarios: Ideal, Bajo Estrés y Mal Condicionado
           </h3>
         </div>
         {activeScenarioId === 'custom' && (

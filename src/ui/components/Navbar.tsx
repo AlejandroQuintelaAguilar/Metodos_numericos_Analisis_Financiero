@@ -27,19 +27,20 @@ export const Navbar: React.FC = () => {
             </div>
           </div>
 
-          {/* Enlaces de Navegación Rápida */}
-          <div className="hidden lg:flex items-center space-x-1 text-xs font-medium text-slate-300">
-            <a href="#inicio" className="px-3 py-1.5 rounded-lg hover:text-white hover:bg-slate-800 transition">Inicio</a>
-            <a href="#caso-estudio" className="px-3 py-1.5 rounded-lg hover:text-white hover:bg-slate-800 transition">Caso TI</a>
-            <a href="#formulacion" className="px-3 py-1.5 rounded-lg hover:text-white hover:bg-slate-800 transition">Formulación</a>
-            <a href="#editor" className="px-3 py-1.5 rounded-lg hover:text-white hover:bg-slate-800 transition">Entrada Ax=b</a>
-            <a href="#gcp-vs-gc" className="px-3 py-1.5 rounded-lg hover:text-white hover:bg-slate-800 transition">GCP vs GC</a>
-            <a href="#errores" className="px-3 py-1.5 rounded-lg hover:text-white hover:bg-slate-800 transition">Errores</a>
-            <a href="#tabla-comparativa" className="px-3 py-1.5 rounded-lg hover:text-white hover:bg-slate-800 transition">Comparativa</a>
-            <a href="#qa" className="px-3 py-1.5 rounded-lg hover:text-white hover:bg-slate-800 transition flex items-center gap-1.5 text-emerald-400 font-semibold bg-emerald-950/40 border border-emerald-800/50">
-              <ShieldCheck className="w-3.5 h-3.5" /> Módulo QA
+          {/* Enlaces de Navegación Rápida (Orden estricto Módulos 1 al 10) */}
+          <div className="hidden xl:flex items-center space-x-1 text-[11px] font-medium text-slate-300">
+            <a href="#inicio" className="px-2.5 py-1.5 rounded-lg hover:text-white hover:bg-slate-800 transition">1. Inicio</a>
+            <a href="#caso-estudio" className="px-2.5 py-1.5 rounded-lg hover:text-white hover:bg-slate-800 transition">2. Caso TI</a>
+            <a href="#formulacion" className="px-2.5 py-1.5 rounded-lg hover:text-white hover:bg-slate-800 transition">3. Formulación</a>
+            <a href="#editor" className="px-2.5 py-1.5 rounded-lg hover:text-white hover:bg-slate-800 transition">4. Entrada</a>
+            <a href="#escenarios" className="px-2.5 py-1.5 rounded-lg hover:text-white hover:bg-slate-800 transition">5. Escenarios</a>
+            <a href="#solucion-referencia" className="px-2.5 py-1.5 rounded-lg hover:text-white hover:bg-slate-800 transition">6. Referencia</a>
+            <a href="#gcp-vs-gc" className="px-2.5 py-1.5 rounded-lg hover:text-white hover:bg-slate-800 transition">7. GCP vs GC</a>
+            <a href="#errores" className="px-2.5 py-1.5 rounded-lg hover:text-white hover:bg-slate-800 transition">8. Errores</a>
+            <a href="#qa" className="px-2.5 py-1.5 rounded-lg hover:text-white hover:bg-slate-800 transition flex items-center gap-1 text-emerald-400 font-semibold bg-emerald-950/40 border border-emerald-800/50">
+              <ShieldCheck className="w-3.5 h-3.5" /> 9. QA
             </a>
-            <a href="#conclusiones" className="px-3 py-1.5 rounded-lg hover:text-white hover:bg-slate-800 transition">Conclusiones</a>
+            <a href="#conclusiones" className="px-2.5 py-1.5 rounded-lg hover:text-white hover:bg-slate-800 transition">10. Conclusiones</a>
           </div>
 
           {/* Badge de Mención y Estado */}

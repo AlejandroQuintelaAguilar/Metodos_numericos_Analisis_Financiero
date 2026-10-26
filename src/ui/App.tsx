@@ -221,15 +221,8 @@ export const App: React.FC = () => {
         vectorB={vectorB}
       />
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 flex-1 w-full">
-        {/* Selector de Escenarios Oficiales */}
-        <ScenarioButtons
-          activeScenarioId={activeScenarioId}
-          onSelectScenario={handleSelectScenario}
-          onResetCustom={handleResetCustom}
-        />
-
-        {/* Editor de Coeficientes y Controles */}
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 flex-1 w-full space-y-10">
+        {/* Módulo 4: Entrada de Datos, Coeficientes A, b, x0 y Controles */}
         <MatrixEditor
           matrixA={matrixA}
           vectorB={vectorB}
@@ -247,7 +240,14 @@ export const App: React.FC = () => {
           onSymmetrize={handleSymmetrize}
         />
 
-        {/* Solución Numérica de Referencia (Cholesky Directo) */}
+        {/* Módulo 5: Tres Escenarios Oficiales (Carga Rápida y Ejecución) */}
+        <ScenarioButtons
+          activeScenarioId={activeScenarioId}
+          onSelectScenario={handleSelectScenario}
+          onResetCustom={handleResetCustom}
+        />
+
+        {/* Módulo 6: Solución Numérica de Referencia (Cholesky Directo) */}
         <DirectSolutionDisplay choleskyResult={choleskyResult} />
 
         {/* Contraste GCP vs GC y Gráfico de Convergencia */}

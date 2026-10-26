@@ -20,10 +20,12 @@ export const MathFormulationSection: React.FC<MathFormulationProps> = ({
   matrixA,
   vectorB
 }) => {
+  const subscripts = ['₁', '₂', '₃', '₄'];
+
   return (
     <section id="formulacion" className="py-16 border-b border-slate-800 bg-slate-900/40">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-3xl mx-auto mb-12">
+        <div className="text-center max-w-3xl mx-auto mb-10">
           <span className="text-xs uppercase tracking-wider font-semibold text-blue-400">
             Módulo 3 · Formulación Matemática Rigurosa (Secciones 6.1 y 7.3)
           </span>
@@ -36,41 +38,88 @@ export const MathFormulationSection: React.FC<MathFormulationProps> = ({
           </p>
         </div>
 
-        {/* Definición Explícita de Variables (n=4), Sistema Lineal Ax=b e Interpretación de a_ij */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-8">
-          {/* Definición Explícita de Variables e Interpretación de Coeficientes */}
-          <div className="lg:col-span-5 p-6 rounded-2xl bg-slate-900/90 border border-slate-800 shadow-xl space-y-4">
-            <h3 className="text-sm font-bold text-white uppercase tracking-wider text-blue-400">
-              1. Definición Explícita de Variables (n = 4) e Interpretación de Coeficientes a_ij
-            </h3>
-            <ul className="space-y-2 text-xs text-slate-300 font-mono bg-slate-950 p-3.5 rounded-xl border border-slate-800">
-              <li><strong className="text-blue-400">x₁ ∈ ℝ⁺:</strong> Presupuesto Infraestructura Cloud &amp; DevOps ($K USD)</li>
-              <li><strong className="text-red-400">x₂ ∈ ℝ⁺:</strong> Presupuesto Ciberseguridad &amp; Auditoría ($K USD)</li>
-              <li><strong className="text-amber-400">x₃ ∈ ℝ⁺:</strong> Presupuesto Ingeniería de Software Core ($K USD)</li>
-              <li><strong className="text-emerald-400">x₄ ∈ ℝ⁺:</strong> Presupuesto QA, Testing &amp; Observabilidad ($K USD)</li>
-            </ul>
-            <div className="text-xs text-slate-300 space-y-2 leading-relaxed">
-              <p>
-                <strong className="text-indigo-300">Coeficientes Diagonales (a_ii &gt; 0):</strong> Representan el costo marginal cuadrático de congestión o rigidez interna propia del departamento <em>i</em>.
+        {/* Fila 1: Modelo Cuadrático y Criterio de Sylvester (2 Columnas Simétricas) */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+          <div className="p-6 rounded-2xl bg-slate-900/90 border border-slate-800 shadow-xl flex flex-col justify-between">
+            <div>
+              <div className="flex items-center gap-2 mb-3 text-blue-400">
+                <FunctionSquare className="w-5 h-5" />
+                <h3 className="text-base font-bold text-white">1. Función Objetivo Cuadrática Convexa</h3>
+              </div>
+              <p className="text-xs text-slate-300 leading-relaxed mb-4">
+                La optimización equilibra el beneficio marginal lineal directo con los costos de coordinación cuadráticos:
               </p>
-              <p>
-                <strong className="text-cyan-300">Coeficientes Cruzados (a_ij = a_ji):</strong> Cuantifican la interdependencia simétrica de recursos entre los departamentos <em>i</em> y <em>j</em> (fricción de sincronización interdepartamental).
+              <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 text-center mb-4">
+                <MathBlock math="\min_{x \in \mathbb{R}^4} \Phi(x) = \frac{1}{2} x^T A x - b^T x" block={true} />
+              </div>
+            </div>
+            <div>
+              <p className="text-xs text-slate-400 leading-relaxed mb-2">
+                Condición necesaria y suficiente de primer orden (gradiente nulo):
               </p>
+              <div className="p-3 rounded-lg bg-slate-950/80 border border-slate-800 text-center">
+                <MathBlock math="\nabla \Phi(x) = A x - b = 0 \quad \Longleftrightarrow \quad A x = b" block={false} />
+              </div>
             </div>
           </div>
 
-          {/* Sistema Lineal Desarrollado Ax = b */}
-          <div className="lg:col-span-7 p-6 rounded-2xl bg-slate-900/90 border border-slate-800 shadow-xl flex flex-col justify-between">
+          <div className="p-6 rounded-2xl bg-slate-900/90 border border-slate-800 shadow-xl flex flex-col justify-between">
+            <div>
+              <div className="flex items-center gap-2 mb-3 text-indigo-400">
+                <Binary className="w-5 h-5" />
+                <h3 className="text-base font-bold text-white">2. Criterio de Sylvester (Certificación SPD)</h3>
+              </div>
+              <p className="text-xs text-slate-300 leading-relaxed mb-4">
+                Una matriz simétrica A es estrictamente definida positiva si y solo si todos sus 
+                menores principales dominantes son positivos:
+              </p>
+              <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 text-center mb-4">
+                <MathBlock math="\Delta_k = \det(A_{1:k, 1:k}) > 0, \quad \forall k \in \{1, 2, 3, 4\}" block={true} />
+              </div>
+            </div>
+            <div className="p-3 rounded-lg bg-slate-950/80 border border-slate-800 text-xs text-slate-400 text-center">
+              Garantiza que la Hessiana <MathBlock math="\nabla^2 \Phi(x) = A > 0" /> sea estrictamente convexa y el mínimo sea único.
+            </div>
+          </div>
+        </div>
+
+        {/* Fila 2: Definición Explícita de Variables (n=4), Interpretación de Coeficientes y Sistema Ax=b */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+          <div className="p-6 rounded-2xl bg-slate-900/90 border border-slate-800 shadow-xl flex flex-col justify-between space-y-4">
+            <div>
+              <h3 className="text-sm font-bold text-blue-400 uppercase tracking-wider mb-3">
+                3. Variables Explícitas (n = 4) e Interpretación de Coeficientes a_ij
+              </h3>
+              <ul className="space-y-2 text-xs text-slate-300 font-mono bg-slate-950 p-3.5 rounded-xl border border-slate-800">
+                <li><strong className="text-blue-400">x₁ ∈ ℝ⁺:</strong> Presupuesto Infraestructura Cloud &amp; DevOps ($K USD)</li>
+                <li><strong className="text-red-400">x₂ ∈ ℝ⁺:</strong> Presupuesto Ciberseguridad &amp; Auditoría ($K USD)</li>
+                <li><strong className="text-amber-400">x₃ ∈ ℝ⁺:</strong> Presupuesto Ingeniería de Software Core ($K USD)</li>
+                <li><strong className="text-emerald-400">x₄ ∈ ℝ⁺:</strong> Presupuesto QA, Testing &amp; Observabilidad ($K USD)</li>
+              </ul>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-slate-300">
+              <div className="p-3 rounded-xl bg-slate-950/80 border border-slate-800">
+                <strong className="text-indigo-300 block mb-1">Diagonal Principal (a_ii &gt; 0):</strong>
+                Costo marginal cuadrático de congestión o rigidez interna propia del área <em>i</em>.
+              </div>
+              <div className="p-3 rounded-xl bg-slate-950/80 border border-slate-800">
+                <strong className="text-cyan-300 block mb-1">Acoplamiento Cruzado (a_ij = a_ji):</strong>
+                Interdependencia simétrica de recursos y sincronización entre las áreas <em>i</em> y <em>j</em>.
+              </div>
+            </div>
+          </div>
+
+          <div className="p-6 rounded-2xl bg-slate-900/90 border border-slate-800 shadow-xl flex flex-col justify-between">
             <div>
               <h3 className="text-sm font-bold uppercase tracking-wider text-emerald-400 mb-3">
-                2. Sistema de Ecuaciones Lineales Explícito (Ax = b)
+                4. Sistema de Ecuaciones Lineales Explícito (Ax = b)
               </h3>
               <p className="text-xs text-slate-400 mb-3">
                 Representación algebraica en tiempo real de las 4 ecuaciones simultáneas activas en memoria:
               </p>
-              <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 font-mono text-xs space-y-2 overflow-x-auto">
+              <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 font-mono text-xs space-y-2.5 overflow-x-auto">
                 {matrixA.map((row, i) => (
-                  <div key={i} className="flex items-center justify-between gap-2 text-slate-200 whitespace-nowrap">
+                  <div key={i} className="flex items-center justify-between gap-3 text-slate-200 whitespace-nowrap py-0.5 border-b border-slate-900 last:border-0">
                     <span>
                       <span className="text-slate-500 mr-2">Ec. {i + 1}:</span>
                       {row.map((coef, j) => {
@@ -80,7 +129,7 @@ export const MathFormulationSection: React.FC<MathFormulationProps> = ({
                           <span key={j}>
                             {sign}
                             <strong className={i === j ? 'text-blue-300' : 'text-slate-300'}>{absVal}</strong>
-                            <span className="text-indigo-400">·x_{j + 1}</span>
+                            <span className="text-indigo-400">·x{subscripts[j] ?? j + 1}</span>
                           </span>
                         );
                       })}
@@ -93,50 +142,9 @@ export const MathFormulationSection: React.FC<MathFormulationProps> = ({
               </div>
             </div>
             <div className="mt-4 pt-3 border-t border-slate-800/80 flex items-center justify-between text-[11px] text-slate-400">
-              <span>Forma Matricial Compacta: <strong className="text-slate-200 font-mono">A ∈ ℝ⁴ˣ⁴, x ∈ ℝ⁴, b ∈ ℝ⁴</strong></span>
+              <span>Dimensiones: <strong className="text-slate-200 font-mono">A ∈ ℝ⁴ˣ⁴, x ∈ ℝ⁴, b ∈ ℝ⁴</strong></span>
               <span className="text-blue-300 font-mono">∇Φ(x) = Ax - b = 0</span>
             </div>
-          </div>
-        </div>
-
-        {/* Modelo Cuadrático */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
-          <div className="p-6 rounded-2xl bg-slate-900/90 border border-slate-800 shadow-xl">
-            <div className="flex items-center gap-2 mb-4 text-blue-400">
-              <FunctionSquare className="w-5 h-5" />
-              <h3 className="text-base font-bold text-white">Función Objetivo Cuadrática Convexa</h3>
-            </div>
-            <p className="text-xs text-slate-300 leading-relaxed mb-4">
-              La optimización equilibra el beneficio marginal lineal directo con los costos de coordinación cuadráticos:
-            </p>
-            <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 text-center mb-4">
-              <MathBlock math="\min_{x \in \mathbb{R}^4} \Phi(x) = \frac{1}{2} x^T A x - b^T x" block={true} />
-            </div>
-            <p className="text-xs text-slate-400 leading-relaxed">
-              Condición necesaria y suficiente de primer orden (gradiente nulo):
-            </p>
-            <div className="p-3 rounded-lg bg-slate-950/80 border border-slate-800 text-center mt-2">
-              <MathBlock math="\nabla \Phi(x) = A x - b = 0 \quad \Longleftrightarrow \quad A x = b" block={false} />
-            </div>
-          </div>
-
-          {/* Criterio de Sylvester */}
-          <div className="p-6 rounded-2xl bg-slate-900/90 border border-slate-800 shadow-xl">
-            <div className="flex items-center gap-2 mb-4 text-indigo-400">
-              <Binary className="w-5 h-5" />
-              <h3 className="text-base font-bold text-white">Criterio de Sylvester (Certificación SPD)</h3>
-            </div>
-            <p className="text-xs text-slate-300 leading-relaxed mb-4">
-              Una matriz simétrica A es estrictamente definida positiva si y solo si todos sus 
-              menores principales dominantes son positivos:
-            </p>
-            <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 text-center mb-4">
-              <MathBlock math="\Delta_k = \det(A_{1:k, 1:k}) > 0, \quad \forall k \in \{1, 2, 3, 4\}" block={true} />
-            </div>
-            <p className="text-xs text-slate-400 leading-relaxed">
-              Garantiza que la Hessiana <MathBlock math="\nabla^2 \Phi(x) = A > 0" /> sea estrictamente convexa, 
-              asegurando que el mínimo sea global y único.
-            </p>
           </div>
         </div>
 
