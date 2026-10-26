@@ -1,6 +1,6 @@
 /**
  * @file ConvergenceChart.tsx
- * @description Gráfica interactiva de convergencia semilogarítmica en SVG nativo:
+ * @description Gráfica interactiva de convergencia semilogarítmica en SVG nativo con estilo editorial limpio:
  * log10(||r_k||_2 / ||b||_2) vs. número de iteración k para contrastar GC vs. GCP.
  */
 
@@ -25,22 +25,18 @@ export const ConvergenceChart: React.FC<ConvergenceChartProps> = ({
     y: number;
   } | null>(null);
 
-  // Dimensiones del gráfico SVG
   const width = 640;
   const height = 300;
   const padding = { top: 30, right: 30, bottom: 45, left: 65 };
   const chartW = width - padding.left - padding.right;
   const chartH = height - padding.top - padding.bottom;
 
-  // Rango de iteraciones
   const maxK = Math.max(
     1,
     ...gcHistory.map(h => h.iteration),
     ...gcpHistory.map(h => h.iteration)
   );
 
-  // Escala Logarítmica: log10(relativeResidual)
-  // Rango típico: de 0 (residuo relativo 1.0) a -16 (precisión de máquina)
   const minLog = -16;
   const maxLog = 0.5;
 
@@ -51,7 +47,6 @@ export const ConvergenceChart: React.FC<ConvergenceChartProps> = ({
     return padding.top + (1 - ratio) * chartH;
   };
 
-  // Puntos para líneas
   const makePath = (history: readonly IterationStep[]) => {
     if (history.length === 0) return '';
     return history
@@ -63,38 +58,37 @@ export const ConvergenceChart: React.FC<ConvergenceChartProps> = ({
   const pathGCP = makePath(gcpHistory);
   const yTol = getY(tolerance);
 
-  // Marcas de eje Y
   const yTicks = [0, -2, -4, -6, -8, -10, -12, -14, -16];
 
   return (
-    <div className="p-5 rounded-xl bg-slate-950 border border-slate-800 shadow-inner">
+    <div className="p-5 rounded-xl bg-slate-50 border border-slate-200">
       <div className="flex flex-wrap items-center justify-between gap-4 mb-3">
         <div>
-          <h4 className="text-xs font-bold text-slate-200 uppercase tracking-wider">
+          <h4 className="text-xs font-bold text-slate-800 uppercase tracking-wider">
             Curva de Descenso Residual Semilogarítmica
           </h4>
-          <span className="text-[11px] text-slate-400">log₁₀(||r_k||₂ / ||b||₂) vs. Iteración k</span>
+          <span className="text-[11px] text-slate-500">log₁₀(||r_k||₂ / ||b||₂) vs. Iteración k</span>
         </div>
 
-        {/* Leyenda */}
+        {/* Leyenda Sobria */}
         <div className="flex items-center gap-4 text-xs font-medium">
           <div className="flex items-center gap-1.5">
-            <span className="w-3 h-0.5 bg-amber-400 inline-block rounded" />
-            <span className="text-amber-300">GC Simple</span>
+            <span className="w-3 h-0.5 bg-amber-700 inline-block rounded" />
+            <span className="text-slate-700">GC Simple</span>
           </div>
           <div className="flex items-center gap-1.5">
-            <span className="w-3 h-0.5 bg-emerald-400 inline-block rounded" />
-            <span className="text-emerald-300">GCP (Suñagua)</span>
+            <span className="w-3 h-0.5 bg-teal-700 inline-block rounded" />
+            <span className="text-slate-700">GCP (Suñagua)</span>
           </div>
           <div className="flex items-center gap-1.5">
-            <span className="w-3 h-0.5 border-t border-dashed border-red-400 inline-block" />
-            <span className="text-red-300 font-mono text-[10px]">Tol = 10⁻⁶</span>
+            <span className="w-3 h-0.5 border-t border-dashed border-rose-700 inline-block" />
+            <span className="text-rose-800 font-mono text-[10px]">Tol = 10⁻⁶</span>
           </div>
         </div>
       </div>
 
       {/* SVG Responsive */}
-      <div className="relative overflow-x-auto">
+      <div className="relative overflow-x-auto bg-white rounded-lg border border-slate-200 p-2">
         <svg
           viewBox={`0 0 ${width} ${height}`}
           className="w-full h-auto min-w-[500px] overflow-visible"
@@ -109,7 +103,7 @@ export const ConvergenceChart: React.FC<ConvergenceChartProps> = ({
                   y1={yPos}
                   x2={width - padding.right}
                   y2={yPos}
-                  stroke="#1e293b"
+                  stroke="#e2e8f0"
                   strokeWidth="1"
                 />
                 <text
@@ -132,15 +126,15 @@ export const ConvergenceChart: React.FC<ConvergenceChartProps> = ({
             y1={yTol}
             x2={width - padding.right}
             y2={yTol}
-            stroke="#ef4444"
-            strokeWidth="1.5"
+            stroke="#be123c"
+            strokeWidth="1.25"
             strokeDasharray="4 4"
           />
           <text
             x={width - padding.right}
             y={yTol - 6}
             textAnchor="end"
-            fill="#ef4444"
+            fill="#9f1239"
             fontSize="9"
             fontWeight="bold"
             fontFamily="JetBrains Mono, monospace"
@@ -158,14 +152,14 @@ export const ConvergenceChart: React.FC<ConvergenceChartProps> = ({
                   y1={height - padding.bottom}
                   x2={xPos}
                   y2={height - padding.bottom + 5}
-                  stroke="#475569"
+                  stroke="#94a3b8"
                   strokeWidth="1"
                 />
                 <text
                   x={xPos}
                   y={height - padding.bottom + 18}
                   textAnchor="middle"
-                  fill="#94a3b8"
+                  fill="#475569"
                   fontSize="10"
                   fontFamily="JetBrains Mono, monospace"
                 >
@@ -179,8 +173,8 @@ export const ConvergenceChart: React.FC<ConvergenceChartProps> = ({
           <path
             d={pathGC}
             fill="none"
-            stroke="#f59e0b"
-            strokeWidth="2.5"
+            stroke="#b45309"
+            strokeWidth="2.25"
             strokeLinecap="round"
             strokeLinejoin="round"
           />
@@ -189,8 +183,8 @@ export const ConvergenceChart: React.FC<ConvergenceChartProps> = ({
           <path
             d={pathGCP}
             fill="none"
-            stroke="#10b981"
-            strokeWidth="2.5"
+            stroke="#0f766e"
+            strokeWidth="2.25"
             strokeLinecap="round"
             strokeLinejoin="round"
           />
@@ -201,11 +195,11 @@ export const ConvergenceChart: React.FC<ConvergenceChartProps> = ({
               key={`gc-${i}`}
               cx={getX(h.iteration)}
               cy={getY(h.relativeResidual)}
-              r="4.5"
-              fill="#f59e0b"
-              stroke="#0f172a"
+              r="4"
+              fill="#b45309"
+              stroke="#ffffff"
               strokeWidth="1.5"
-              className="cursor-pointer hover:r-6 transition-all"
+              className="cursor-pointer transition-all"
               onMouseEnter={() =>
                 setHoveredPoint({
                   method: 'GC',
@@ -224,11 +218,11 @@ export const ConvergenceChart: React.FC<ConvergenceChartProps> = ({
               key={`gcp-${i}`}
               cx={getX(h.iteration)}
               cy={getY(h.relativeResidual)}
-              r="4.5"
-              fill="#10b981"
-              stroke="#0f172a"
+              r="4"
+              fill="#0f766e"
+              stroke="#ffffff"
               strokeWidth="1.5"
-              className="cursor-pointer hover:r-6 transition-all"
+              className="cursor-pointer transition-all"
               onMouseEnter={() =>
                 setHoveredPoint({
                   method: 'GCP',
@@ -245,14 +239,14 @@ export const ConvergenceChart: React.FC<ConvergenceChartProps> = ({
         {/* Tooltip flotante */}
         {hoveredPoint && (
           <div
-            className="absolute z-20 pointer-events-none p-3 rounded-lg bg-slate-900 border border-slate-700 shadow-xl text-xs font-mono text-slate-200"
+            className="absolute z-20 pointer-events-none p-3 rounded-lg bg-white border border-slate-300 shadow-md text-xs font-mono text-slate-800"
             style={{
               left: `${Math.min(chartW, Math.max(10, hoveredPoint.x - 70))}px`,
               top: `${Math.max(10, hoveredPoint.y - 85)}px`
             }}
           >
-            <div className="font-bold flex items-center justify-between gap-2 border-b border-slate-800 pb-1 mb-1">
-              <span className={hoveredPoint.method === 'GCP' ? 'text-emerald-400' : 'text-amber-400'}>
+            <div className="font-bold flex items-center justify-between gap-2 border-b border-slate-200 pb-1 mb-1">
+              <span className={hoveredPoint.method === 'GCP' ? 'text-teal-800' : 'text-amber-800'}>
                 {hoveredPoint.method} · Paso k = {hoveredPoint.step.iteration}
               </span>
             </div>

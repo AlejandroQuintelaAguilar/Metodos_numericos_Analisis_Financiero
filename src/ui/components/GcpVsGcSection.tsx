@@ -32,20 +32,20 @@ export const GcpVsGcSection: React.FC<GcpVsGcSectionProps> = ({
   const conditionReduction = (conditionNumberA / Math.max(0.001, conditionNumberPrec)).toFixed(1);
 
   return (
-    <div id="gcp-vs-gc" className="p-6 rounded-2xl bg-slate-900/90 border border-slate-800 shadow-xl mb-12">
-      <div className="flex flex-wrap items-center justify-between gap-4 mb-6 pb-4 border-b border-slate-800">
+    <div id="gcp-vs-gc" className="p-6 rounded-2xl bg-white border border-slate-200 shadow-xs mb-12">
+      <div className="flex flex-wrap items-center justify-between gap-4 mb-6 pb-4 border-b border-slate-200">
         <div>
-          <span className="text-xs uppercase tracking-wider font-semibold text-blue-400">
+          <span className="text-xs uppercase tracking-wider font-semibold text-slate-700">
             Módulo 7 · Contraste Algorítmico y Velocidad de Convergencia
           </span>
-          <h3 className="text-xl font-bold text-white tracking-tight mt-0.5">
+          <h3 className="text-xl font-bold text-slate-900 tracking-tight mt-0.5">
             GCP (Suñagua 2020) vs. GC Simple (Sin Precondicionar)
           </h3>
         </div>
 
         <div className="flex items-center gap-2">
-          <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold bg-blue-950/80 text-blue-300 border border-blue-800/60 font-mono">
-            <Zap className="w-3.5 h-3.5 text-amber-400" />
+          <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold bg-slate-100 text-slate-800 border border-slate-300 font-mono">
+            <Zap className="w-3.5 h-3.5 text-amber-800" />
             Aceleración Espectral: {conditionReduction}x ({speedup}x iters)
           </span>
         </div>
@@ -54,18 +54,18 @@ export const GcpVsGcSection: React.FC<GcpVsGcSectionProps> = ({
       {/* Tarjetas Comparativas Lado a Lado */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
         {/* GC Simple */}
-        <div className="p-5 rounded-xl bg-slate-950/80 border border-amber-900/40 shadow-lg relative overflow-hidden">
+        <div className="p-5 rounded-xl bg-slate-50 border border-slate-200 shadow-xs relative overflow-hidden">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-2">
               <span className="w-2.5 h-2.5 rounded-full bg-amber-400" />
-              <h4 className="text-sm font-bold text-white uppercase tracking-wider">
+              <h4 className="text-sm font-bold text-slate-900 uppercase tracking-wider">
                 GC Simple (Sin Precondicionar)
               </h4>
             </div>
             <span className={`inline-flex items-center gap-1 text-[11px] font-semibold px-2 py-0.5 rounded ${
               gcResult.converged
-                ? 'bg-emerald-950/60 text-emerald-300 border border-emerald-800/40'
-                : 'bg-red-950/60 text-red-300 border border-red-800/40'
+                ? 'bg-teal-50/80 text-teal-800 border border-teal-200'
+                : 'bg-rose-50 text-rose-800 border border-rose-300'
             }`}>
               {gcResult.converged ? <CheckCircle2 className="w-3 h-3" /> : <XCircle className="w-3 h-3" />}
               {gcResult.converged ? 'Convergió' : 'No alcanzó tol'}
@@ -73,30 +73,30 @@ export const GcpVsGcSection: React.FC<GcpVsGcSectionProps> = ({
           </div>
 
           <div className="grid grid-cols-2 gap-3 mb-4">
-            <div className="p-3 rounded-lg bg-slate-900/90 border border-slate-800">
-              <span className="text-[10px] text-slate-400 block uppercase">Iteraciones</span>
-              <span className="text-xl font-bold text-amber-400 font-mono">{gcResult.iterations}</span>
+            <div className="p-3 rounded-lg bg-white border border-slate-200">
+              <span className="text-[10px] text-slate-600 block uppercase">Iteraciones</span>
+              <span className="text-xl font-bold text-amber-800 font-mono">{gcResult.iterations}</span>
             </div>
-            <div className="p-3 rounded-lg bg-slate-900/90 border border-slate-800">
-              <span className="text-[10px] text-slate-400 block uppercase">Residuo Rel. Final</span>
-              <span className="text-xs font-bold text-slate-200 font-mono truncate block mt-1">
+            <div className="p-3 rounded-lg bg-white border border-slate-200">
+              <span className="text-[10px] text-slate-600 block uppercase">Residuo Rel. Final</span>
+              <span className="text-xs font-bold text-slate-800 font-mono truncate block mt-1">
                 {gcResult.finalRelativeResidual.toExponential(3)}
               </span>
             </div>
           </div>
 
           <div className="space-y-2 text-xs">
-            <div className="flex justify-between py-1 border-b border-slate-800/60 text-slate-400">
+            <div className="flex justify-between py-1 border-b border-slate-200 text-slate-600">
               <span>Número de Condición Original κ(A):</span>
-              <span className="font-mono text-slate-200 font-bold">{conditionNumberA.toFixed(2)}</span>
+              <span className="font-mono text-slate-800 font-bold">{conditionNumberA.toFixed(2)}</span>
             </div>
-            <div className="flex justify-between py-1 border-b border-slate-800/60 text-slate-400">
+            <div className="flex justify-between py-1 border-b border-slate-200 text-slate-600">
               <span>Tiempo de Cómputo:</span>
-              <span className="font-mono text-slate-200">{gcResult.executionTimeMs.toFixed(3)} ms</span>
+              <span className="font-mono text-slate-800">{gcResult.executionTimeMs.toFixed(3)} ms</span>
             </div>
-            <div className="pt-2 text-slate-400">
+            <div className="pt-2 text-slate-600">
               <span className="block mb-1 text-[11px]">Vector Solución x_GC:</span>
-              <div className="p-2 rounded bg-slate-900 border border-slate-800 font-mono text-[11px] text-slate-300 truncate">
+              <div className="p-2 rounded bg-white border border-slate-200 font-mono text-[11px] text-slate-700 truncate">
                 [{gcResult.x.map(v => v.toFixed(3)).join(', ')}]
               </div>
             </div>
@@ -104,18 +104,18 @@ export const GcpVsGcSection: React.FC<GcpVsGcSectionProps> = ({
         </div>
 
         {/* GCP Suñagua 2020 */}
-        <div className="p-5 rounded-xl bg-slate-950/80 border border-emerald-900/40 shadow-lg relative overflow-hidden">
+        <div className="p-5 rounded-xl bg-slate-50 border border-slate-200 shadow-xs relative overflow-hidden">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-2">
               <span className="w-2.5 h-2.5 rounded-full bg-emerald-400" />
-              <h4 className="text-sm font-bold text-white uppercase tracking-wider">
+              <h4 className="text-sm font-bold text-slate-900 uppercase tracking-wider">
                 GCP (Suñagua 2020 - Precondicionado)
               </h4>
             </div>
             <span className={`inline-flex items-center gap-1 text-[11px] font-semibold px-2 py-0.5 rounded ${
               gcpResult.converged
-                ? 'bg-emerald-950/60 text-emerald-300 border border-emerald-800/40'
-                : 'bg-red-950/60 text-red-300 border border-red-800/40'
+                ? 'bg-teal-50/80 text-teal-800 border border-teal-200'
+                : 'bg-rose-50 text-rose-800 border border-rose-300'
             }`}>
               {gcpResult.converged ? <CheckCircle2 className="w-3 h-3" /> : <XCircle className="w-3 h-3" />}
               {gcpResult.converged ? 'Convergió' : 'No alcanzó tol'}
@@ -123,30 +123,30 @@ export const GcpVsGcSection: React.FC<GcpVsGcSectionProps> = ({
           </div>
 
           <div className="grid grid-cols-2 gap-3 mb-4">
-            <div className="p-3 rounded-lg bg-slate-900/90 border border-slate-800">
-              <span className="text-[10px] text-slate-400 block uppercase">Iteraciones</span>
-              <span className="text-xl font-bold text-emerald-400 font-mono">{gcpResult.iterations}</span>
+            <div className="p-3 rounded-lg bg-white border border-slate-200">
+              <span className="text-[10px] text-slate-600 block uppercase">Iteraciones</span>
+              <span className="text-xl font-bold text-teal-800 font-mono">{gcpResult.iterations}</span>
             </div>
-            <div className="p-3 rounded-lg bg-slate-900/90 border border-slate-800">
-              <span className="text-[10px] text-slate-400 block uppercase">Residuo Rel. Final</span>
-              <span className="text-xs font-bold text-slate-200 font-mono truncate block mt-1">
+            <div className="p-3 rounded-lg bg-white border border-slate-200">
+              <span className="text-[10px] text-slate-600 block uppercase">Residuo Rel. Final</span>
+              <span className="text-xs font-bold text-slate-800 font-mono truncate block mt-1">
                 {gcpResult.finalRelativeResidual.toExponential(3)}
               </span>
             </div>
           </div>
 
           <div className="space-y-2 text-xs">
-            <div className="flex justify-between py-1 border-b border-slate-800/60 text-slate-400">
+            <div className="flex justify-between py-1 border-b border-slate-200 text-slate-600">
               <span>Condición Precondicionada κ(M⁻¹A):</span>
-              <span className="font-mono text-emerald-300 font-bold">{conditionNumberPrec.toFixed(2)}</span>
+              <span className="font-mono text-teal-800 font-bold">{conditionNumberPrec.toFixed(2)}</span>
             </div>
-            <div className="flex justify-between py-1 border-b border-slate-800/60 text-slate-400">
+            <div className="flex justify-between py-1 border-b border-slate-200 text-slate-600">
               <span>Tiempo de Cómputo:</span>
-              <span className="font-mono text-slate-200">{gcpResult.executionTimeMs.toFixed(3)} ms</span>
+              <span className="font-mono text-slate-800">{gcpResult.executionTimeMs.toFixed(3)} ms</span>
             </div>
-            <div className="pt-2 text-slate-400">
+            <div className="pt-2 text-slate-600">
               <span className="block mb-1 text-[11px]">Vector Solución x_GCP:</span>
-              <div className="p-2 rounded bg-slate-900 border border-slate-800 font-mono text-[11px] text-slate-300 truncate">
+              <div className="p-2 rounded bg-white border border-slate-200 font-mono text-[11px] text-slate-700 truncate">
                 [{gcpResult.x.map(v => v.toFixed(3)).join(', ')}]
               </div>
             </div>
@@ -162,13 +162,13 @@ export const GcpVsGcSection: React.FC<GcpVsGcSectionProps> = ({
       />
 
       {/* Tabla de Trazabilidad Paso a Paso del Algoritmo de Suñagua (2020) */}
-      <div className="mt-6 pt-6 border-t border-slate-800/80">
-        <h4 className="text-xs font-bold text-slate-300 uppercase tracking-wider mb-3">
+      <div className="mt-6 pt-6 border-t border-slate-200">
+        <h4 className="text-xs font-bold text-slate-700 uppercase tracking-wider mb-3">
           Trazabilidad de Iteraciones del Algoritmo GCP de Suñagua (2020) (Mz_k = r_k, α_k, β_k, x_k)
         </h4>
-        <div className="overflow-x-auto rounded-xl border border-slate-800">
+        <div className="overflow-x-auto rounded-xl border border-slate-200">
           <table className="w-full text-left text-[11px] font-mono">
-            <thead className="bg-slate-950 text-slate-400 uppercase border-b border-slate-800">
+            <thead className="bg-slate-50 text-slate-600 uppercase border-b border-slate-200">
               <tr>
                 <th className="py-2.5 px-3">Paso k</th>
                 <th className="py-2.5 px-3">Tamaño α_k</th>
@@ -178,15 +178,15 @@ export const GcpVsGcSection: React.FC<GcpVsGcSectionProps> = ({
                 <th className="py-2.5 px-3">Aproximación x_k ($K USD)</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-800/60 bg-slate-950/50">
+            <tbody className="divide-y divide-slate-200 bg-slate-50">
               {gcpResult.history.map((step) => (
-                <tr key={step.iteration} className="hover:bg-slate-900/60 transition">
-                  <td className="py-2 px-3 font-bold text-emerald-400">k = {step.iteration}</td>
-                  <td className="py-2 px-3 text-slate-300">{step.alpha.toFixed(6)}</td>
-                  <td className="py-2 px-3 text-slate-400">{step.beta !== null ? step.beta.toFixed(6) : '—'}</td>
-                  <td className="py-2 px-3 text-slate-300">{step.residualNorm.toExponential(3)}</td>
-                  <td className="py-2 px-3 font-semibold text-blue-300">{step.relativeResidual.toExponential(3)}</td>
-                  <td className="py-2 px-3 text-slate-200">
+                <tr key={step.iteration} className="hover:bg-white transition">
+                  <td className="py-2 px-3 font-bold text-teal-800">k = {step.iteration}</td>
+                  <td className="py-2 px-3 text-slate-700">{step.alpha.toFixed(6)}</td>
+                  <td className="py-2 px-3 text-slate-600">{step.beta !== null ? step.beta.toFixed(6) : '—'}</td>
+                  <td className="py-2 px-3 text-slate-700">{step.residualNorm.toExponential(3)}</td>
+                  <td className="py-2 px-3 font-semibold text-slate-800">{step.relativeResidual.toExponential(3)}</td>
+                  <td className="py-2 px-3 text-slate-800">
                     [{step.x.map(v => v.toFixed(3)).join(', ')}]
                   </td>
                 </tr>
@@ -197,17 +197,17 @@ export const GcpVsGcSection: React.FC<GcpVsGcSectionProps> = ({
       </div>
 
       {/* Diagnóstico Técnico Automatizado (Sección 7 - Módulo 7) */}
-      <div className="mt-6 p-4 rounded-xl bg-blue-950/20 border border-blue-900/50 text-xs text-slate-300 leading-relaxed">
-        <strong className="text-blue-400 uppercase tracking-wider block mb-1 text-[11px]">
+      <div className="mt-6 p-4 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-700 leading-relaxed">
+        <strong className="text-slate-700 uppercase tracking-wider block mb-1 text-[11px]">
           Diagnóstico Numérico y de Velocidad de Convergencia:
         </strong>
-        El precondicionador activo (<strong className="text-white">{gcpResult.preconditionerName}</strong>) transforma el espectro del sistema reduciendo el número de condición de{' '}
-        <span className="font-mono text-amber-300">κ(A) = {conditionNumberA.toFixed(2)}</span> a{' '}
-        <span className="font-mono text-emerald-300">κ(M⁻¹A) = {conditionNumberPrec.toFixed(2)}</span> (factor de compresión espectral de{' '}
-        <strong className="text-white">{conditionReduction}x</strong>). El método GCP de Suñagua (2020) alcanza la tolerancia{' '}
-        <span className="font-mono text-blue-300">10⁻⁶</span> en <strong className="text-emerald-400">{gcpResult.iterations} iteraciones</strong> frente a las{' '}
-        <strong className="text-amber-400">{gcResult.iterations} iteraciones</strong> del GC simple, con un residuo relativo final de{' '}
-        <span className="font-mono text-emerald-300">{gcpResult.finalRelativeResidual.toExponential(3)}</span>.
+        El precondicionador activo (<strong className="text-slate-900">{gcpResult.preconditionerName}</strong>) transforma el espectro del sistema reduciendo el número de condición de{' '}
+        <span className="font-mono text-amber-800">κ(A) = {conditionNumberA.toFixed(2)}</span> a{' '}
+        <span className="font-mono text-teal-800">κ(M⁻¹A) = {conditionNumberPrec.toFixed(2)}</span> (factor de compresión espectral de{' '}
+        <strong className="text-slate-900">{conditionReduction}x</strong>). El método GCP de Suñagua (2020) alcanza la tolerancia{' '}
+        <span className="font-mono text-slate-800">10⁻⁶</span> en <strong className="text-teal-800">{gcpResult.iterations} iteraciones</strong> frente a las{' '}
+        <strong className="text-amber-800">{gcResult.iterations} iteraciones</strong> del GC simple, con un residuo relativo final de{' '}
+        <span className="font-mono text-teal-800">{gcpResult.finalRelativeResidual.toExponential(3)}</span>.
       </div>
     </div>
   );
