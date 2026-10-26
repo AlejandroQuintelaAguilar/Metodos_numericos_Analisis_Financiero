@@ -183,7 +183,7 @@ export const GcpVsGcSection: React.FC<GcpVsGcSectionProps> = ({
                 <tr key={step.iteration} className="hover:bg-slate-900/60 transition">
                   <td className="py-2 px-3 font-bold text-emerald-400">k = {step.iteration}</td>
                   <td className="py-2 px-3 text-slate-300">{step.alpha.toFixed(6)}</td>
-                  <td className="py-2 px-3 text-slate-400">{step.beta.toFixed(6)}</td>
+                  <td className="py-2 px-3 text-slate-400">{step.beta !== null ? step.beta.toFixed(6) : '—'}</td>
                   <td className="py-2 px-3 text-slate-300">{step.residualNorm.toExponential(3)}</td>
                   <td className="py-2 px-3 font-semibold text-blue-300">{step.relativeResidual.toExponential(3)}</td>
                   <td className="py-2 px-3 text-slate-200">
@@ -194,6 +194,20 @@ export const GcpVsGcSection: React.FC<GcpVsGcSectionProps> = ({
             </tbody>
           </table>
         </div>
+      </div>
+
+      {/* Diagnóstico Técnico Automatizado (Sección 7 - Módulo 7) */}
+      <div className="mt-6 p-4 rounded-xl bg-blue-950/20 border border-blue-900/50 text-xs text-slate-300 leading-relaxed">
+        <strong className="text-blue-400 uppercase tracking-wider block mb-1 text-[11px]">
+          Diagnóstico Numérico y de Velocidad de Convergencia:
+        </strong>
+        El precondicionador activo (<strong className="text-white">{gcpResult.preconditionerName}</strong>) transforma el espectro del sistema reduciendo el número de condición de{' '}
+        <span className="font-mono text-amber-300">κ(A) = {conditionNumberA.toFixed(2)}</span> a{' '}
+        <span className="font-mono text-emerald-300">κ(M⁻¹A) = {conditionNumberPrec.toFixed(2)}</span> (factor de compresión espectral de{' '}
+        <strong className="text-white">{conditionReduction}x</strong>). El método GCP de Suñagua (2020) alcanza la tolerancia{' '}
+        <span className="font-mono text-blue-300">10⁻⁶</span> en <strong className="text-emerald-400">{gcpResult.iterations} iteraciones</strong> frente a las{' '}
+        <strong className="text-amber-400">{gcResult.iterations} iteraciones</strong> del GC simple, con un residuo relativo final de{' '}
+        <span className="font-mono text-emerald-300">{gcpResult.finalRelativeResidual.toExponential(3)}</span>.
       </div>
     </div>
   );

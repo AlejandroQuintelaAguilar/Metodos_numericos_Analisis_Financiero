@@ -109,6 +109,13 @@ export const ConclusionsSection: React.FC = () => {
                 <em>Iterative Methods for Sparse Linear Systems</em> (2nd ed.). SIAM (Society for Industrial and Applied Mathematics). Philadelphia.
               </p>
             </div>
+
+            <div className="p-3 rounded-xl bg-slate-950 border border-slate-800/80">
+              <span className="text-emerald-400 font-bold block mb-0.5">[4] Fuentes de Datos y Benchmarks Financieros TI</span>
+              <p className="font-sans text-slate-300">
+                Parámetros de asignación presupuestaria TI ($K USD) y elasticidades de acoplamiento interdepartamental calibrados conforme a <em>FinOps Foundation – State of FinOps Benchmarks</em> y <em>Gartner IT Key Metrics Data</em> para infraestructuras Cloud/DevOps, Ciberseguridad, Desarrollo Core y QA.
+              </p>
+            </div>
           </div>
         </div>
 

@@ -5,7 +5,7 @@
  */
 
 import React from 'react';
-import { Cloud, ShieldAlert, Code2, CheckCircle2, TrendingUp, Network } from 'lucide-react';
+import { Cloud, ShieldAlert, Code2, CheckCircle2, TrendingUp, Network, Database } from 'lucide-react';
 import { FINANCIAL_VARIABLES } from '../../core/constants/scenarios.data';
 
 export const FinancialCaseSection: React.FC = () => {
@@ -58,8 +58,8 @@ export const FinancialCaseSection: React.FC = () => {
           ))}
         </div>
 
-        {/* Justificación Económica de A y b */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* Justificación Económica de A, b y Procedencia de los Datos */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="p-6 rounded-2xl bg-slate-900/50 border border-slate-800/80">
             <div className="flex items-center gap-3 mb-3 text-blue-400">
               <TrendingUp className="w-5 h-5" />
@@ -84,6 +84,19 @@ export const FinancialCaseSection: React.FC = () => {
               interna (rendimientos marginales decrecientes). Los términos fuera de la diagonal 
               <code className="text-indigo-300 font-mono"> a_ij = a_ji ≥ 0</code> miden el costo de coordinación interdepartamental 
               (ej. mayor volumen de desarrollo en x₃ exige mayor tiempo de auditoría en x₂ y suites de pruebas en x₄).
+            </p>
+          </div>
+
+          <div className="p-6 rounded-2xl bg-slate-900/50 border border-slate-800/80">
+            <div className="flex items-center gap-3 mb-3 text-emerald-400">
+              <Database className="w-5 h-5" />
+              <h4 className="text-base font-bold text-white">Procedencia de los Datos Financieros</h4>
+            </div>
+            <p className="text-xs text-slate-300 leading-relaxed">
+              Los parámetros están calibrados sobre estructuras de costos reales de dirección de ingeniería de software 
+              y marcos de referencia <strong>FinOps Foundation</strong> y <strong>Gartner IT Key Metrics</strong> 
+              (presupuestos departamentales entre <code className="text-emerald-300 font-mono">$5K</code> y <code className="text-emerald-300 font-mono">$45K USD</code> trimestrales), 
+              garantizando consistencia económica entre los tres escenarios y soluciones analíticas exactas auditables.
             </p>
           </div>
         </div>

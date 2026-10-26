@@ -42,7 +42,7 @@ export const ScenarioButtons: React.FC<ScenarioButtonsProps> = ({
         )}
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-5">
         {ALL_SCENARIOS.map((sc) => {
           const isSelected = activeScenarioId === sc.id;
           let icon = <Sparkles className="w-4 h-4 text-emerald-400" />;
@@ -95,6 +95,30 @@ export const ScenarioButtons: React.FC<ScenarioButtonsProps> = ({
           );
         })}
       </div>
+
+      {/* Detalle Financiero y Matemático del Escenario Seleccionado (Sección 5) */}
+      {activeScenarioId !== 'custom' && (() => {
+        const activeSc = ALL_SCENARIOS.find(s => s.id === activeScenarioId);
+        if (!activeSc) return null;
+        return (
+          <div className="p-4 rounded-xl bg-slate-950/80 border border-slate-800/90 text-xs space-y-2">
+            <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800/70 pb-2">
+              <span className="font-bold text-blue-300 uppercase tracking-wider text-[11px]">
+                Justificación Financiera y Modificación Matemática ({activeSc.academicTitle})
+              </span>
+              <span className="font-mono text-[11px] text-emerald-400">
+                Precondicionador: {activeSc.preconditioning.type} (κ reducido a {activeSc.preconditioning.preconditionedConditionNumber.toFixed(2)})
+              </span>
+            </div>
+            <p className="text-slate-300 leading-relaxed">
+              <strong className="text-white">Contexto Económico:</strong> {activeSc.financialContext}
+            </p>
+            <p className="text-slate-400 leading-relaxed">
+              <strong className="text-slate-200">Análisis del Precondicionamiento:</strong> {activeSc.preconditioning.technicalExplanation}
+            </p>
+          </div>
+        );
+      })()}
     </div>
   );
 };

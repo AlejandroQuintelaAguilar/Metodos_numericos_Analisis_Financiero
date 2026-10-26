@@ -11,23 +11,92 @@ import { MatrixValidationResult } from '../../qa/types/qa.types';
 
 interface MathFormulationProps {
   validation: MatrixValidationResult;
+  matrixA: number[][];
+  vectorB: number[];
 }
 
-export const MathFormulationSection: React.FC<MathFormulationProps> = ({ validation }) => {
+export const MathFormulationSection: React.FC<MathFormulationProps> = ({
+  validation,
+  matrixA,
+  vectorB
+}) => {
   return (
     <section id="formulacion" className="py-16 border-b border-slate-800 bg-slate-900/40">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-12">
           <span className="text-xs uppercase tracking-wider font-semibold text-blue-400">
-            Módulo 3 · Formulación Matemática Rigurosa
+            Módulo 3 · Formulación Matemática Rigurosa (Secciones 6.1 y 7.3)
           </span>
           <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight mt-1">
-            Minimización Cuadrática y Criterio de Sylvester
+            Definición de Variables, Sistema Lineal Ax = b y Criterio de Sylvester
           </h2>
           <p className="text-slate-400 text-sm mt-3 leading-relaxed">
             El equilibrio óptimo de asignación presupuestaria minimiza la fricción cuadrática neta. 
             Al ser la matriz A Simétrica y Estrictamente Definida Positiva (SPD), la solución es única.
           </p>
+        </div>
+
+        {/* Definición Explícita de Variables (n=4), Sistema Lineal Ax=b e Interpretación de a_ij */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-8">
+          {/* Definición Explícita de Variables e Interpretación de Coeficientes */}
+          <div className="lg:col-span-5 p-6 rounded-2xl bg-slate-900/90 border border-slate-800 shadow-xl space-y-4">
+            <h3 className="text-sm font-bold text-white uppercase tracking-wider text-blue-400">
+              1. Definición Explícita de Variables (n = 4) e Interpretación de Coeficientes a_ij
+            </h3>
+            <ul className="space-y-2 text-xs text-slate-300 font-mono bg-slate-950 p-3.5 rounded-xl border border-slate-800">
+              <li><strong className="text-blue-400">x₁ ∈ ℝ⁺:</strong> Presupuesto Infraestructura Cloud &amp; DevOps ($K USD)</li>
+              <li><strong className="text-red-400">x₂ ∈ ℝ⁺:</strong> Presupuesto Ciberseguridad &amp; Auditoría ($K USD)</li>
+              <li><strong className="text-amber-400">x₃ ∈ ℝ⁺:</strong> Presupuesto Ingeniería de Software Core ($K USD)</li>
+              <li><strong className="text-emerald-400">x₄ ∈ ℝ⁺:</strong> Presupuesto QA, Testing &amp; Observabilidad ($K USD)</li>
+            </ul>
+            <div className="text-xs text-slate-300 space-y-2 leading-relaxed">
+              <p>
+                <strong className="text-indigo-300">Coeficientes Diagonales (a_ii &gt; 0):</strong> Representan el costo marginal cuadrático de congestión o rigidez interna propia del departamento <em>i</em>.
+              </p>
+              <p>
+                <strong className="text-cyan-300">Coeficientes Cruzados (a_ij = a_ji):</strong> Cuantifican la interdependencia simétrica de recursos entre los departamentos <em>i</em> y <em>j</em> (fricción de sincronización interdepartamental).
+              </p>
+            </div>
+          </div>
+
+          {/* Sistema Lineal Desarrollado Ax = b */}
+          <div className="lg:col-span-7 p-6 rounded-2xl bg-slate-900/90 border border-slate-800 shadow-xl flex flex-col justify-between">
+            <div>
+              <h3 className="text-sm font-bold uppercase tracking-wider text-emerald-400 mb-3">
+                2. Sistema de Ecuaciones Lineales Explícito (Ax = b)
+              </h3>
+              <p className="text-xs text-slate-400 mb-3">
+                Representación algebraica en tiempo real de las 4 ecuaciones simultáneas activas en memoria:
+              </p>
+              <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 font-mono text-xs space-y-2 overflow-x-auto">
+                {matrixA.map((row, i) => (
+                  <div key={i} className="flex items-center justify-between gap-2 text-slate-200 whitespace-nowrap">
+                    <span>
+                      <span className="text-slate-500 mr-2">Ec. {i + 1}:</span>
+                      {row.map((coef, j) => {
+                        const sign = j === 0 ? '' : coef >= 0 ? ' + ' : ' - ';
+                        const absVal = j === 0 ? coef.toFixed(2) : Math.abs(coef).toFixed(2);
+                        return (
+                          <span key={j}>
+                            {sign}
+                            <strong className={i === j ? 'text-blue-300' : 'text-slate-300'}>{absVal}</strong>
+                            <span className="text-indigo-400">·x_{j + 1}</span>
+                          </span>
+                        );
+                      })}
+                    </span>
+                    <span className="text-emerald-400 font-bold">
+                      = {vectorB[i]?.toFixed(2)} $K
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="mt-4 pt-3 border-t border-slate-800/80 flex items-center justify-between text-[11px] text-slate-400">
+              <span>Forma Matricial Compacta: <strong className="text-slate-200 font-mono">A ∈ ℝ⁴ˣ⁴, x ∈ ℝ⁴, b ∈ ℝ⁴</strong></span>
+              <span className="text-blue-300 font-mono">∇Φ(x) = Ax - b = 0</span>
+            </div>
+          </div>
         </div>
 
         {/* Modelo Cuadrático */}
