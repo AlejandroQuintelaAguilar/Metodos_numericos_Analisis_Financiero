@@ -121,7 +121,7 @@ export const ConclusionsSection: React.FC = () => {
 
         {/* Footer final */}
         <div className="text-center pt-12 text-slate-500 text-xs">
-          Universidad Mayor de San Andrés · Carrera de Informática · Desafío de Métodos Numéricos (2026)
+          Universidad Mayor de San Andrés · Carrera de Informática · Univ. Alejandro Quintela Aguilar (R.U.: 1802408 · C.I.: 6805626) · Métodos Numéricos (2026)
         </div>
       </div>
     </section>

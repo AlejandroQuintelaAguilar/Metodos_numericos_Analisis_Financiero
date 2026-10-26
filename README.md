@@ -11,6 +11,9 @@
 ---
 
 ### 1. Información Institucional y Académica
+* **Estudiante:** Univ. Alejandro Quintela Aguilar
+* **Registro Universitario (R.U.):** 1802408
+* **Cédula de Identidad (C.I.):** 6805626
 * **Institución:** Universidad Mayor de San Andrés (UMSA)
 * **Facultad:** Facultad de Ciencias Puras y Naturales (FCPN)
 * **Carrera:** Informática
