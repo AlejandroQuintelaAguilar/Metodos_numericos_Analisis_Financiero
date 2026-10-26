@@ -90,6 +90,16 @@ export const MatrixEditor: React.FC<MatrixEditorProps> = ({
         </div>
       </div>
 
+      {/* Guía de Uso Integrada (Exigida en Nota de la Sección 11) */}
+      <div className="mb-6 p-3.5 rounded-xl bg-blue-950/20 border border-blue-900/40 text-xs text-slate-300 flex flex-wrap items-center justify-between gap-2">
+        <div>
+          <strong className="text-blue-400">Guía de Uso Interactivo:</strong>{' '}
+          1) Edita cualquier celda <code className="font-mono text-blue-300">a_ij</code>, demanda <code className="font-mono text-emerald-300">b_i</code> o vector inicial <code className="font-mono text-blue-300">x₀</code> (o carga un escenario en el Módulo 5).{' '}
+          2) Cambia el precondicionador (<code className="font-mono text-indigo-300">Jacobi / IC(0) / Identidad</code>) para observar el recálculo instantáneo.{' '}
+          3) Usa los botones superiores para poner a prueba el validador ante matrices inválidas.
+        </div>
+      </div>
+
       {/* Alerta de Error de Validación si aplica */}
       {!validation.isValid && (
         <div className="mb-6 p-4 rounded-xl bg-red-950/60 border border-red-800/80 text-red-200 text-xs">
