@@ -26,9 +26,6 @@ export const HeroSection: React.FC = () => {
             <span className="px-3 py-1 text-xs font-mono rounded-md bg-slate-100 text-slate-700 border border-slate-200">
               Materia: Métodos Numéricos
             </span>
-            <span className="px-3 py-1 text-xs font-mono rounded-md bg-slate-100 text-slate-700 border border-slate-200">
-              Prof. Porfirio Suñagua S. (2020)
-            </span>
           </div>
         </div>
 
