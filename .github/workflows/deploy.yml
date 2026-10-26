@@ -30,10 +30,9 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: 'npm'
 
       - name: Instalar Dependencias
-        run: npm ci
+        run: npm install
 
       - name: Ejecutar Suite Integral de Pruebas (Sylvester, Solvers y QA Engine)
         run: npm test
